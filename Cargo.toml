@@ -1,0 +1,12 @@
+[package]
+name = "mattos"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bootloader = "0.9"
+
+[[bin]]
+name = "mattos"
+test = false
+bench = false
