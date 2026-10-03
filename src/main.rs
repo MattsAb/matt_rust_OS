@@ -6,15 +6,18 @@
 
 use mattos::println;
 use core::panic::PanicInfo;
+use bootloader::{BootInfo, entry_point};
 
-#[unsafe(no_mangle)]
-pub extern "C" fn _start() -> ! {
+entry_point!(kernel_main);
+
+fn kernel_main(boot_info: &'static BootInfo) -> ! {
     println!("Hello World{}", "!");
 
     mattos::init();
 
 
-    x86_64::instructions::interrupts::int3();
+    let ptr = 0xdeadbeaf as *mut u8;
+    unsafe { *ptr = 42; }
 
     #[cfg(test)]
     test_main();
